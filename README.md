@@ -1,54 +1,88 @@
 # React-Spring-Boot
 
-A Spring Boot backend for a Product catalog. Provides a simple REST API to manage products and includes a seeded H2 dataset.
+> Lightweight Spring Boot backend for a Product Catalog (H2 seeded)
 
-Project structure
+<p align="center">
+  <img alt="logo" src="https://raw.githubusercontent.com/github/explore/main/topics/spring-boot/spring-boot.png" width="120" />
+</p>
+
+## Overview
+A simple, starter Spring Boot application exposing a REST API to manage products. Includes JPA entities, a repository, service layer and controller, plus a seeded H2 dataset for quick local testing.
+
+## Highlights
+- Spring Boot + Jakarta Persistence (JPA)
+- H2 in-memory database with seed data (src/main/resources/data.sql)
+- Clean layered structure: controller → service → repo → model
+- Maven wrapper for reproducible builds
+
+## Project structure
 
 - pom.xml
 - mvnw, mvnw.cmd, .mvn/
 - src/
   - main/
     - java/com/H2_Connection/React_Spring/Boot/
-      - ReactSpringBootApplication.java  (Spring Boot entrypoint)
+      - ReactSpringBootApplication.java        # Spring Boot entrypoint
       - controller/
-        - ProductController.java  (REST endpoints)
+        - ProductController.java              # REST endpoints (/api)
       - service/
-        - ProductService.java     (business logic)
+        - ProductService.java                 # Business logic
       - repo/
-        - ProductRepo.java        (JPA repository)
+        - ProductRepo.java                    # JPA repository
       - model/
-        - Product.java            (JPA entity: id, name, description, brand, price, category, releaseDate, available, quantity)
+        - Product.java                        # JPA entity (id, name, description, brand, price, category, releaseDate, available, quantity)
     - resources/
-      - application.properties   (app configuration)
-      - data.sql                 (sample INSERTs to seed DB)
-- target/ (build output)
+      - application.properties                # App configuration
+      - data.sql                              # Sample INSERTs to seed DB
+- target/                                    # Build output
 
-Key endpoints
+## API Endpoints
+- GET /api/           → "Hello World"
+- GET /api/products   → Returns all products as JSON
 
-- GET /api/           -> "Hello World"
-- GET /api/products   -> returns a list of Product JSON
+Example curl:
 
-Model (Product) fields
+```bash
+curl -s http://localhost:8080/api/products | jq .
+```
 
-- id (int)
-- name (String)
-- description (String)
-- brand (String)
-- price (BigDecimal)
-- category (String)
-- releaseDate (Date)
-- available (Boolean)
-- quantity (int)
+## Product model (summary)
+- id: int
+- name: String
+- description: String
+- brand: String
+- price: BigDecimal
+- category: String
+- releaseDate: Date
+- available: Boolean
+- quantity: int
 
-Run the app
+## Run locally
+Windows (Maven wrapper):
 
-- Using Maven wrapper (Windows):
-  .\mvnw spring-boot:run
+```powershell
+.\mvnw spring-boot:run
+```
 
-- Or with installed Maven:
-  mvn spring-boot:run
+Or with Maven installed:
 
-Notes
+```bash
+mvn spring-boot:run
+```
 
-- Data is seeded from src/main/resources/data.sql during startup (H2). Replace ProductService.getAllProducts() implementation with repository calls if not already done.
-- If a React frontend is used, host it separately and point its API calls to this backend's /api endpoints.
+App will start on http://localhost:8080 by default.
+
+## Quick development notes
+- Data is seeded from src/main/resources/data.sql during startup.
+- ProductService currently returns a placeholder list — wire it to ProductRepo (JPA) for real data retrieval.
+- Use Postman or curl to exercise endpoints.
+
+## Contributing
+Contributions welcome. Open issues or PRs for improvements, features, or bug fixes.
+
+## License
+MIT — feel free to use and adapt.
+
+---
+
+Made with ❤️ — React frontend can be added separately and configured to consume /api endpoints.
