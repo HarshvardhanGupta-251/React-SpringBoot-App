@@ -1,15 +1,31 @@
 package com.H2_Connection.React_Spring.Boot.controller;
 
 
+import com.H2_Connection.React_Spring.Boot.model.Product;
+import com.H2_Connection.React_Spring.Boot.service.ProductService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class ProductController {
 
+    private ProductService productService;
+    public void  ProductService() {
+        productService.getAllProducts();
+    }
+
     @RequestMapping("/")
     public String greet(){
         return "Hello World";
     }
+
+    @GetMapping("/products")
+    public List<Product> getProducts(){
+        return service.getAllProducts();
+    }
+
 }
