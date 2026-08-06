@@ -3,6 +3,7 @@ package com.H2_Connection.React_Spring.Boot.controller;
 
 import com.H2_Connection.React_Spring.Boot.model.Product;
 import com.H2_Connection.React_Spring.Boot.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,10 +14,9 @@ import java.util.List;
 @RequestMapping("/api")
 public class ProductController {
 
+    @Autowired
     private ProductService productService;
-    public void  ProductService() {
-        productService.getAllProducts();
-    }
+
 
     @RequestMapping("/")
     public String greet(){
@@ -25,7 +25,7 @@ public class ProductController {
 
     @GetMapping("/products")
     public List<Product> getProducts(){
-        return service.getAllProducts();
+        return productService.getAllProducts();
     }
 
 }
